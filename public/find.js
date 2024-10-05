@@ -1,4 +1,4 @@
-export function findMapByTitle(title){
+export default function findMapByTitle(title){
     const database = firebase.database();
     const mapsRef = database.ref('maps');
 
@@ -11,7 +11,7 @@ export function findMapByTitle(title){
 });
 }
 
-export function findObjectByTitle(mapTitle,title){
+export default function findObjectByTitle(mapTitle,title){
     const database = firebase.database();
     const mapsRef = database.ref('maps');
 

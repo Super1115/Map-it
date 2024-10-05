@@ -1,3 +1,42 @@
+function findMapByTitle(title){
+    const database = firebase.database();
+    const mapsRef = database.ref('maps');
+
+    mapsRef.orderByChild('title').equalTo(title).once('value', (snapshot) => {
+    snapshot.forEach(childSnapshot => {
+        const mapData = childSnapshot.val();
+        console.log(mapData); // Output: Data for users with name "John Doe"
+        return mapData
+    });
+});
+}
+
+function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
+    const database = firebase.database();
+    const user = firebase.auth().currentUser;
+    const UID = user.uid;
+    const userName = user.displayName
+    const newObject = {
+        x : x,
+        y : y,
+        user: userName,
+        time : Date.now(),
+        title : objectTitle,
+        file : fileRefNo,
+        description : description,
+        UID: UID
+
+    };
+    database.ref(`/maps/${mapTitle}/`).push(newObject)
+    .then(snapshot => {
+        console.log('Object added');
+        //應導重新渲染地圖
+    })
+    .catch(error => {
+        console.error('Error adding object:', error);
+    });
+}
+
 // 初始化地圖
 var map = L.map('map').setView([51.505, -0.09], 13);
 
@@ -5,6 +44,7 @@ var map = L.map('map').setView([51.505, -0.09], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
 
 // 儲存當前點擊的經緯度
 var newMarkerLatLng = null;
@@ -43,13 +83,14 @@ map.on('click', function(e) {
 
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
 function saveMarker() {
-  var mapTitle = "defaultMap";  // 假設這是你的地圖標題
-  var title = document.getElementById('title').value;
-  var description = document.getElementById('description').value;
-  var fileInput = document.getElementById('file');
+    var mapTitle = findMapByTitle('testMap'); 
+    var title = document.getElementById('title').value;
+    var description = document.getElementById('description').value;
+    var fileInput = document.getElementById('file');
 
   // 檢查是否取得 fileInput 元素
   console.log("File input element:", fileInput);
+  console.log(mapTitle);
   
   // 檢查檔案欄位是否存在以及是否選擇了檔案
   var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
@@ -86,7 +127,7 @@ function saveMarker() {
       // 清空輸入框
       document.getElementById('title').value = '';
       document.getElementById('description').value = '';
-      fileInput.value = '';  // 清空檔案上傳欄位
+      fileInput.value = null;  // 清空檔案上傳欄位
   } else {
       alert("Please click on the map to add a marker and ensure you're logged in.");
   }
