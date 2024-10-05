@@ -14,7 +14,7 @@ function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
         UID: UID
 
     };
-    database.ref(`/maps/${mapTitle}`).push(newObject)
+    database.ref(`/maps/${mapTitle}/`).push(newObject)
     .then(snapshot => {
         console.log('Object added');
         //應導重新渲染地圖
