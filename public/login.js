@@ -23,3 +23,4 @@ function signOut(){
           // An error happened.
         });
 }
+
