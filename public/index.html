@@ -75,9 +75,17 @@
     <div class="signOut" id="signOut"><h1 id="signOutDivUserName" onclick="signOut()" id="signOutButton"></h1></div>
     <div class="main">
       <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
-      <button class="button" onclick="">Create</button>
+      <button class="button" onclick="showPrompt()">Create</button>
       <button class="button" onclick="window.location.href='map.html'">maps</button>
     </div>
-
+    
+    <script>
+      function showPrompt() {
+          var userInput = prompt("Input map code：", "Input here...");
+          if (userInput != null) {
+              alert("Your map code is: " + userInput);
+          }
+      }
+    </script>
   </body>
 </html>
