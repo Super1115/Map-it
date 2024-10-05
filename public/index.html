@@ -20,19 +20,24 @@
     <script defer src="/__/firebase/10.14.0/firebase-performance-compat.js"></script>
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
+      body {
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <style media="screen">
       @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-        body {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    margin: 0;
+              body{
+                  font-family: "Bebas Neue", sans-serif;
+                  font-weight: 400;
                     background-color: #f0f0f0;
+              }
+                .main{
+                  height: 100vh;
+                  margin: 0;
+                  display: flex;
+                  justify-content: center;
+                    align-items: center;
                 }
                 .button {
                     display: block;
@@ -46,20 +51,32 @@
                     color: white;
                     background-color: #007BFF;
                     border: none;
-                    border-radius: 5px;
+                    border-radius: 10px;
                     cursor: pointer;
                     transition: background-color 0.3s;
                 }
                 .button:hover {
                     background-color: #0056b3;
                 }
+                .signOut{
+                  display: none;
+                }
+                #signOutButton{
+                  cursor: pointer;
+                  font-size: 5vw;
+                  font-style: normal;
+                }
+
     </style>
   </head>
   <body>
     <script src="login.js"></script>
-    <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
-    <button class="button" onclick="signOut()">Sign out</button>
-    <button class="button" onclick="console.log(user.displayName)">Maps</button>
-
+    <div class="signOut" id="signOut"><h1 id="signOutDivUserName" onclick="signOut()" id="signOutButton"></h1></div>
+    <div class="main">
+      <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
+      <button class="button" onclick="">Create</button>
+      <button class="button" onclick="console.log(user.displayName)">Maps</button>
+  
+    </div>
   </body>
 </html>
