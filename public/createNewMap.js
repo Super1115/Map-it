@@ -1,7 +1,13 @@
 function showCreateNewMapPrompt() {
-    var userInput = prompt("Input map Title：", "Input here...");
-    if (userInput != null) {
-        newMap(userInput)
+    const user = firebase.auth().currentUser;
+    if(user){
+        var userInput = prompt("Input map Title：", "Input here...");
+        if (userInput != null) {
+            newMap(userInput)
+        }
+    }
+    else{
+        alert("You Must Login To Create Map")
     }
 }
 
