@@ -3,15 +3,16 @@ function signInWithGoogle(){
     
         firebase.auth().signInWithPopup(provider)
             .then(result =>{
-                const user = result.user
+                var user = result.user
                 console.log(`User login ${user.displayName} Email ${user.email}`
                 )
             })
     }
 
 function signOut(){
-    const auth = getAuth();
-        signOut(auth).then(() => {
+    const auth = firebase.auth();
+    console.log(auth)
+        auth.signOut().then(() => {
           // Sign-out successful.
           console.log("signed-out")
         }).catch((error) => {
