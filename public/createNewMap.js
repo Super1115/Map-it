@@ -3,6 +3,13 @@ function newMapTestButton(){
     newMap(titleForTest)
 }
 
+function showCreateNewMapPrompt() {
+    var userInput = prompt("Input map Title：", "Input here...");
+    if (userInput != null) {
+        newMap(userInput)
+    }
+}
+
 function newMap(title){
     const database = firebase.database();
     const user = firebase.auth().currentUser;
