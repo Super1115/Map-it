@@ -1,0 +1,48 @@
+[debug] [2024-10-05T03:36:17.457Z] ----------------------------------------------------------------------
+[debug] [2024-10-05T03:36:17.460Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\chuan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2024-10-05T03:36:17.461Z] CLI Version:   13.20.2
+[debug] [2024-10-05T03:36:17.461Z] Platform:      win32
+[debug] [2024-10-05T03:36:17.461Z] Node Version:  v18.18.0
+[debug] [2024-10-05T03:36:17.462Z] Time:          Sat Oct 05 2024 11:36:17 GMT+0800 (Taipei Standard Time)
+[debug] [2024-10-05T03:36:17.462Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-05T03:36:17.702Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-05T03:36:17.703Z] > authorizing via signed-in user (chuangsuper@gmail.com)
+[debug] [2024-10-05T03:36:17.703Z] [iam] checking project map-it-fee3b for permissions ["firebase.projects.get"]
+[debug] [2024-10-05T03:36:17.704Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:17.705Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:17.706Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/map-it-fee3b:testIamPermissions [none]
+[debug] [2024-10-05T03:36:17.706Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/map-it-fee3b:testIamPermissions x-goog-quota-user=projects/map-it-fee3b
+[debug] [2024-10-05T03:36:17.706Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/map-it-fee3b:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-10-05T03:36:18.586Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/map-it-fee3b:testIamPermissions 200
+[debug] [2024-10-05T03:36:18.586Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/map-it-fee3b:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-10-05T03:36:18.588Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:18.588Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:18.589Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b [none]
+[debug] [2024-10-05T03:36:18.962Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b 200
+[debug] [2024-10-05T03:36:18.963Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b {"projectId":"map-it-fee3b","projectNumber":"466109228008","displayName":"Map-it","name":"projects/map-it-fee3b","resources":{"hostingSite":"map-it-fee3b"},"state":"ACTIVE","etag":"1_1acc5d8a-dab4-4c6c-b6e6-5c2214f1b824"}
+[info] 
+[info] === Serving from 'C:\Users\chuan\OneDrive\Documents\GitHub\Map-it'...
+[info] 
+[debug] [2024-10-05T03:36:18.982Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:18.982Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:18.982Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/map-it-fee3b/sites 
+[debug] [2024-10-05T03:36:19.778Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/map-it-fee3b/sites 200
+[debug] [2024-10-05T03:36:19.778Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/map-it-fee3b/sites {"sites":[{"name":"projects/map-it-fee3b/sites/map-it-fee3b","defaultUrl":"https://map-it-fee3b.web.app","appId":"1:466109228008:web:99257b389800648d9c3a5d","type":"DEFAULT_SITE"}]}
+[debug] [2024-10-05T03:36:19.779Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:19.779Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:19.779Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b/webApps/1:466109228008:web:99257b389800648d9c3a5d/config [none]
+[debug] [2024-10-05T03:36:20.549Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b/webApps/1:466109228008:web:99257b389800648d9c3a5d/config 200
+[debug] [2024-10-05T03:36:20.549Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b/webApps/1:466109228008:web:99257b389800648d9c3a5d/config {"projectId":"map-it-fee3b","appId":"1:466109228008:web:99257b389800648d9c3a5d","storageBucket":"map-it-fee3b.appspot.com","apiKey":"AIzaSyDlag6nKf0pSRNhOtfP5UNIuK3tOn7I5a8","authDomain":"map-it-fee3b.firebaseapp.com","messagingSenderId":"466109228008","measurementId":"G-LVCDK5CPB0"}
+[debug] [2024-10-05T03:36:20.562Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:20.562Z] Checked if tokens are valid: true, expires at: 1728100511356
+[debug] [2024-10-05T03:36:20.563Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b [none]
+[debug] [2024-10-05T03:36:20.863Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b 200
+[debug] [2024-10-05T03:36:20.864Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/map-it-fee3b {"projectId":"map-it-fee3b","projectNumber":"466109228008","displayName":"Map-it","name":"projects/map-it-fee3b","resources":{"hostingSite":"map-it-fee3b"},"state":"ACTIVE","etag":"1_1acc5d8a-dab4-4c6c-b6e6-5c2214f1b824"}
+[info] i  hosting[map-it-fee3b]: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting[map-it-fee3b]: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: ::1 - - [05/Oct/2024:03:38:13 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" {"metadata":{"emulator":{"name":"hosting"},"message":"::1 - - [05/Oct/2024:03:38:13 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0\""}}
+[info] i  hosting: ::1 - - [05/Oct/2024:03:38:13 +0000] "GET /__/firebase/init.js?useEmulator=true HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" {"metadata":{"emulator":{"name":"hosting"},"message":"::1 - - [05/Oct/2024:03:38:13 +0000] \"GET /__/firebase/init.js?useEmulator=true HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0\""}}
+[info] i  hosting: ::1 - - [05/Oct/2024:03:38:13 +0000] "GET /app.js HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" {"metadata":{"emulator":{"name":"hosting"},"message":"::1 - - [05/Oct/2024:03:38:13 +0000] \"GET /app.js HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0\""}}
+[info] i  hosting: ::1 - - [05/Oct/2024:03:38:13 +0000] "GET /login.js HTTP/1.1" 200 587 "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" {"metadata":{"emulator":{"name":"hosting"},"message":"::1 - - [05/Oct/2024:03:38:13 +0000] \"GET /login.js HTTP/1.1\" 200 587 \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0\""}}
+[info] i  hosting: ::1 - - [05/Oct/2024:03:38:13 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" {"metadata":{"emulator":{"name":"hosting"},"message":"::1 - - [05/Oct/2024:03:38:13 +0000] \"GET /favicon.ico HTTP/1.1\" - - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0\""}}

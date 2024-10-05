@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    
+    <!-- update the version number as needed -->
+    <script src="app.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.14.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style media="screen">
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                    background-color: #f0f0f0;
+                }
+                .button {
+                    display: block;
+                    width: 30vw;
+                    height: 30vh;
+                    margin: 20px;
+                    font-size: 7vw;
+                    font-family: "Bebas Neue", sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    color: white;
+                    background-color: #007BFF;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                .button:hover {
+                    background-color: #0056b3;
+                }
+    </style>
+  </head>
+  <body>
+    <script src="login.js"></script>
+    <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
+    <button class="button" onclick="signOut()">Sign out</button>
+    <button class="button" onclick="console.log(user.displayName)">Maps</button>
+
+  </body>
+</html>

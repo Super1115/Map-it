@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "firebase": "^10.14.0"
+  },
+  "name": "map-it",
+  "description": "",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Super1115/Map-it.git"
+  },
+  "author": "Super Chuang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Super1115/Map-it/issues"
+  },
+  "homepage": "https://github.com/Super1115/Map-it#readme"
+}
