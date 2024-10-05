@@ -23,6 +23,7 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
 
     <style media="screen">
       @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
@@ -60,6 +61,9 @@
     <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
     <button class="button" onclick="signOut()">Sign out</button>
     <button class="button" onclick="console.log(user.displayName)">Maps</button>
+
+    <!-- 新增的 Show Map 按鈕，點擊後跳轉到 map.html -->
+    <button class="button" onclick="window.location.href='map.html'">Show Map</button>
 
   </body>
 </html>
