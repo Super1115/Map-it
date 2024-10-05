@@ -1,4 +1,4 @@
-function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
+function newObject(map,objectTitle,x,y,fileRefNo,description){
     const database = firebase.database();
     const user = firebase.auth().currentUser;
     const UID = user.uid;

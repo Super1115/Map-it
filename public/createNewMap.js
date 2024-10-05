@@ -44,7 +44,8 @@ function newMap(title){
         title: title,
         user: userName,
         UID: UID,
-        time: Date.now() 
+        time: Date.now(),
+        object : {}
     };
     database.ref('/maps/').push(newMap)
     .then(snapshot => {

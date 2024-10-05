@@ -1,17 +1,19 @@
-function findMapByTitle(title){
+async function findMapByTitle(title){
     const database = firebase.database();
     const mapsRef = database.ref('maps');
+    await mapsRef.orderByChild('title').equalTo(title).once('value', (snapshot) => {
+  snapshot.forEach(childSnapshot => {
+    const mapsRef = childSnapshot.ref; 
+    console.log(mapsRef)
 
-    mapsRef.orderByChild('title').equalTo(title).once('value', (snapshot) => {
-    snapshot.forEach(childSnapshot => {
-        const mapData = childSnapshot.val();
-        console.log(mapData); // Output: Data for users with name "John Doe"
-        return mapData
-    });
+    console.log("函式執行完畢")
+    return mapsRef
+  });
 });
+
 }
 
-function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
+function newObject(mapData,objectTitle,x,y,fileRefNo,description){
     const database = firebase.database();
     const user = firebase.auth().currentUser;
     const UID = user.uid;
@@ -27,10 +29,10 @@ function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
         UID: UID
 
     };
-    database.ref(`/maps/${mapTitle}/`).push(newObject)
+    database.ref(mapData+'Object/').push(newObject)
     .then(snapshot => {
         console.log('Object added');
-        //應導重新渲染地圖
+        //應導向渲染地圖
     })
     .catch(error => {
         console.error('Error adding object:', error);
@@ -52,7 +54,7 @@ var newMarkerLatLng = null;
 // 監聽地圖上的點擊事件，並顯示表單
 map.on('click', function(e) {
     newMarkerLatLng = e.latlng;  // 儲存點擊的位置
-
+    
     var form = document.getElementById('markerForm');
     var coordinates = document.getElementById('coordinates');
     var x = e.originalEvent.pageX;
@@ -82,37 +84,41 @@ map.on('click', function(e) {
 });
 
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
-function saveMarker() {
-    var mapTitle = findMapByTitle('testMap'); 
+async function saveMarker() {
+    console.log("請求")
+    mapRef = await findMapByTitle("testMap")
+    
+    var mapInData = mapRef//輸入地圖標題
+
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var fileInput = document.getElementById('file');
 
   // 檢查是否取得 fileInput 元素
   console.log("File input element:", fileInput);
-  console.log(mapTitle);
+  console.log(mapRef);
   
   // 檢查檔案欄位是否存在以及是否選擇了檔案
   var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
   
   console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
 
-  var user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
 
   // 檢查 user 是否登入
-  console.log("Current user:", user);
+  console.log("Current user:", user.displayName);
 
   if (newMarkerLatLng && user) {
       // 調用 newObject 函數，將資料和座標傳遞給它
       newObject(
-          mapTitle,          // 地圖標題
+        mapInData,          // 地圖
           title,             // 標記的標題
           newMarkerLatLng.lat, // 緯度
           newMarkerLatLng.lng, // 經度
           fileRefNo,         // 檔案名
           description        // 描述
       );
-
+      console.log("加入資料庫")
       // 在地圖上顯示新標記
       const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
       marker.bindPopup(`
@@ -133,6 +139,7 @@ function saveMarker() {
   }
 }
 
+
 // 取消標記操作
 function cancelMarker() {
     // 隱藏表單
@@ -143,3 +150,9 @@ function cancelMarker() {
     document.getElementById('description').value = '';
     document.getElementById('file').value = '';
 }
+
+window.onload = function() {
+    const user = firebase.auth().currentUser;
+    console.log("Current user:", user);
+    //開啟頁面時宣告使用者
+};
