@@ -151,8 +151,10 @@
 
     <div class="button-container">
       <button class="button" onclick="goToHomePage()">Back to Home</button>
+
       <button class="button" onclick="window.location.href = './overview.html'">Overview</button>
       <button class="button" onclick="deleteMap()">Delete Map</button>
+
     </div>
 
     <!-- 地圖容器 -->
@@ -178,6 +180,10 @@
     <script>
       function goToHomePage() {
         window.location.href = 'index.html';  // 返回主頁
+      }
+
+      function goToOverviewPage() {
+        window.location.href = 'OverviewPage.html';  // 返回主頁
       }
 
       window.onload = function() {
