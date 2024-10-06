@@ -132,7 +132,7 @@ async function saveMarker() {
                     marker.bindPopup(`
                         <b>${title}</b><br>
                         Description: ${description}<br>
-                        File: ${fileRefNo}
+                        Image: <img src="${fileRefNo}">
                     `).openPopup();
               
                     // 隱藏表單
@@ -170,7 +170,7 @@ async function saveMarker() {
             marker.bindPopup(`
                 <b>${title}</b><br>
                 Description: ${description}<br>
-                File: ${fileRefNo}
+                Image: <img src="${fileRefNo}">
             `).openPopup();
       
             // 隱藏表單
@@ -282,7 +282,7 @@ function drawObjToMap(x,y,title,fileRefNo,description,UID,user){
       marker.bindPopup(`
           <b>${title}</b><br>
           Description: ${description}<br>
-          File: ${fileRefNo}
+          Image: <img src="${fileRefNo}">
       `).openPopup();
 }
 
