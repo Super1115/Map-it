@@ -1,5 +1,3 @@
-
-
 function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
 
     const user = firebase.auth().currentUser;
@@ -19,42 +17,23 @@ function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
 appendDataByTitle(mapTitle,newObject)
 }
 
-async function appendDataByTitle(title, newData) {
-    const db = firebase.database();
-    const dbRef = ref(db, 'maps');
-    const q = query(dbRef, orderByChild('title'), equalTo(title));
-  
-    try {
-      const snapshot = await get(q);
-      if (snapshot.exists()) {
+function appendDataByTitle(title, newData) {
+    const database = firebase.database();
+    const ref = database.ref('maps/'); // Replace 'your/data/path' with the actual path to your data
+    const titleToFind = title; // Replace with the title you're searching for
+    ref.orderByChild('title').equalTo(titleToFind).once('value', (snapshot) => {
+    if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          const childKey = childSnapshot.key;
-          const existingData = childSnapshot.val().data || {};
-  
-          // Generate a new key for the new data
-          const newKey = push(ref(db)).key;
-  
-          // Prepare the updates
-          const updates = {};
-          updates[`maps/${childKey}/objects/${newKey}`] = newData;
-  
-          // Update the database
-          update(ref(db), updates)
-          .then(snapshot => {
-            console.log('Map added');
-            //應導向渲染地圖
-        })
-        .catch(error => {
-            console.error('Error adding object:', error);
+            const ref = childSnapshot.ref; // This is the reference to the data with the matching title
+            console.log('Found data with title:', titleToFind, 'at ref:', ref);
+            database.ref(ref).push(newData)
+            // You can now access the data using ref.val() or perform other operations
         });
-          console.log('Data appended successfully!');
-        });
-      } else {
-        console.log('No matching title found.');
-      }
-    } catch (error) {
-      console.error('Error getting data: ', error);
+    } else {
+        console.log('No data found with title:', titleToFind);
     }
+});
+
   }
   
 
