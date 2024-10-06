@@ -109,9 +109,32 @@
           padding: 5px;
           margin-bottom: 15px;
       }
+
+      /* 返回主頁按鈕樣式 */
+      .button {
+          display: block;
+          width: 150px;
+          padding: 10px;
+          background-color: #665490;
+          color: white;
+          font-size: 16px;
+          text-align: center;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 20px;
+      }
+
+      .button:hover {
+          background-color: #0056b3;
+      }
+
     </style>
   </head>
   <body>
+    <!-- 返回主頁按鈕 -->
+    <button class="button" onclick="goToHomePage()">Back to Home</button>
+
     <!-- 地圖容器 -->
     <div id="map"></div>
 
@@ -133,12 +156,16 @@
     <script src="app.js"></script>
     <script src="login.js"></script>
     <script>
+      function goToHomePage() {
+        window.location.href = 'index.html';  // 返回主頁
+      }
+
       window.onload = function() {
         const user = firebase.auth().currentUser;
         console.log("Current user:", user);
         console.log("renderMap ")
         renderCurrentMap()
-};
+      };
     </script>
   </body>
 </html>
