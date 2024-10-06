@@ -38,11 +38,10 @@
       }
       .main{
         height: 100vh;
-        margin: 0;
-        display: flex;
         justify-content: center;
-          align-items: center;
+        align-items: center;
       }
+
       .button {
           display: block;
           width: 130px;
@@ -62,6 +61,12 @@
       .button:hover {
           background-color: #0967cb8d;
       }
+
+      #loginButton {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
       .signOut{
         display: none;
       }
@@ -73,14 +78,16 @@
 
     </style>
   </head>
-  <body>
+  <body background="hh-45.jpg">
     <script src="login.js"></script>
     <script src="createNewMap.js"></script>
     <script src="map.js"></script>
     <div class="signOut" id="signOut"><h1 id="signOutDivUserName" onclick="signOut()" id="signOutButton"></h1></div>
     <div class="main">
+      <!-- Login button moved to top-right -->
       <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
 
+      <!-- Create and Maps buttons in the center -->
       <button class="button" onclick="showCreateNewMapPrompt()">Create</button>
       <button class="button" onclick="showOpenMapPrompt()">Maps</button>
     </div>
