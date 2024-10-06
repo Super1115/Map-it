@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview</title>
+    <script defer src="/__/firebase/10.14.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.14.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.14.0/firebase-performance-compat.js"></script>
+
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .button {
+          display: block;
+          width: 150px;
+          padding: 10px;
+          background-color: #665490;
+          color: white;
+          font-size: 16px;
+          text-align: center;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 20px;
+      }
+
+      .button:hover {
+          background-color: #0056b3;
+      }
+      .button-container {
+          display: flex;
+          justify-content: space-between; /* 或者用 justify-content: center; 對齊方式 */
+          gap: 10px; /* 這個屬性用來控制兩個按鈕之間的間距 */
+      }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" onclick="window.location.href = './map.html'">Back to Map View</button>
+        <button class="button" onclick="addRows()">Load data</button>
+      </div>
+    <h1>Overview</h1>
+    
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Coordinates</th>
+                <th>Created by</th>
+            </tr>
+        </thead>
+        <tbody>
+  
+        </tbody>
+    </table>
+    <script src="overview.js"></script>
+    <script src="map.js"></script>
+    <script src="app.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
