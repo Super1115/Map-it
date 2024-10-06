@@ -132,7 +132,7 @@ async function saveMarker() {
                     marker.bindPopup(`
                         <b>${title}</b><br>
                         Description: ${description}<br>
-                        Image: <img src="${fileRefNo}">
+                        Image: <img class = "popUpImg"src="${fileRefNo}">
                     `).openPopup();
               
                     // 隱藏表單
@@ -170,7 +170,7 @@ async function saveMarker() {
             marker.bindPopup(`
                 <b>${title}</b><br>
                 Description: ${description}<br>
-                Image: <img src="${fileRefNo}">
+                Image: <img class = "popUpImg"src="${fileRefNo}">
             `).openPopup();
       
             // 隱藏表單
@@ -277,12 +277,12 @@ function renderObjFromDBToMap(mapData){ //請提供整當地圖的資料
     
 }
 
-function drawObjToMap(x,y,title,fileRefNo,description,UID,user){
+function drawObjToMap(x,y,title,file,description,UID,user){
     const marker = L.marker([x, y]).addTo(map);
       marker.bindPopup(`
           <b>${title}</b><br>
           Description: ${description}<br>
-          Image: <img src="${fileRefNo}">
+          Image: <img class = "popUpImg"src="${file}">
       `).openPopup();
 }
 
