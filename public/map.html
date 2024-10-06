@@ -132,7 +132,12 @@
       .button:hover {
           background-color: #0056b3;
       }
-
+      .button-container {
+          display: flex;
+          justify-content: space-between; /* 或者用 justify-content: center; 對齊方式 */
+          gap: 10px; /* 這個屬性用來控制兩個按鈕之間的間距 */
+      }
+      
       .popUpImg{
         display: flex;
         height: auto;
@@ -143,8 +148,11 @@
     </style>
   </head>
   <body>
-    <!-- 返回主頁按鈕 -->
-    <button class="button" onclick="goToHomePage()">Back to Home</button>
+
+    <div class="button-container">
+      <button class="button" onclick="goToHomePage()">Back to Home</button>
+      <button class="button" onclick="DeleteMap()">Delete Map</button>
+    </div>
 
     <!-- 地圖容器 -->
     <div id="map"></div>
