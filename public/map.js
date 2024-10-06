@@ -1,4 +1,7 @@
+
+
 function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
+
     const user = firebase.auth().currentUser;
     const UID = user.uid;
     const userName = user.displayName
@@ -86,11 +89,11 @@ map.on('click', function(e) {
     var windowHeight = window.innerHeight;
 
     if (x + formWidth > windowWidth) {
-        x = windowWidth - formWidth - 10;  // 距離邊界10px
+        x = windowWidth - formWidth - 30;  // 距離邊界10px
     }
 
     if (y + formHeight > windowHeight) {
-        y = windowHeight - formHeight - 10;
+        y = windowHeight - formHeight - 30;
     }
 
     form.style.left = x + 'px';
@@ -101,24 +104,31 @@ map.on('click', function(e) {
 
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
 async function saveMarker() {
+
+
     var mapTitle = "testMap"//輸入地圖標題
+
 
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var fileInput = document.getElementById('file');
 
+
   // 檢查是否取得 fileInput 元素
   console.log("File input element:", fileInput);
-  
-  // 檢查檔案欄位是否存在以及是否選擇了檔案
-  var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
-  
-  console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
 
-  const user = firebase.auth().currentUser;
+  
+    // 檢查檔案欄位是否存在以及是否選擇了檔案
+    var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
 
-  // 檢查 user 是否登入
-  console.log("Current user:", user.displayName);
+    console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
+
+    const user = firebase.auth().currentUser;
+
+    // 檢查 user 是否登入
+    console.log("Current user:", user.displayName);
+
+
 
   if (newMarkerLatLng && user) {
       // 調用 newObject 函數，將資料和座標傳遞給它
@@ -149,6 +159,7 @@ async function saveMarker() {
   } else {
       alert("Please click on the map to add a marker and ensure you're logged in.");
   }
+
 }
 
 
