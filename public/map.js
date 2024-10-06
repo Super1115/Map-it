@@ -153,14 +153,13 @@ function cancelMarker() {
 function showOpenMapPrompt(){
     const user = firebase.auth().currentUser;
     if(user){
-        var userInput = prompt("Input map Title：", "Input here...");
+        var userInput = prompt("Map Title");
          
         checkMapTitleExists(userInput).then(exists => {
         if (exists) {
             console.log("map exists in the database.");
             window.localStorage.setItem("currentMapTitle",userInput)
             window.location.href='map.html'
-            renderCurrentMap()
         } else {
             alert(`${userInput} does NOT exist! Please Create Map`)
             
@@ -191,10 +190,11 @@ function checkMapTitleExists(title) {
   }
 
 function renderCurrentMap(){
+    console.log("rendering Map")
     currentMapTitle = window.localStorage.getItem("currentMapTitle")
     const database = firebase.database();
     const ref = database.ref('maps/'); // Replace 'your/data/path' with the actual path to your data
-    const titleToFind = title; // Replace with the title you're searching for
+    const titleToFind = currentMapTitle; // Replace with the title you're searching for
     ref.orderByChild('title').equalTo(titleToFind).once('value', (snapshot) => {
     if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
@@ -212,15 +212,19 @@ function renderCurrentMap(){
 }
 
 
-function renderObjFromDBToMap(mapData){ 
-    console.log(`DATA TO Render ${mapData}`)//請提供整當地圖的資料
-    mapData.objects.forEach(object=>
-        {drawObjToMap(object.x,object.y,object.title,object.file,object.description,object.UID,object.user)}
-    )
+function renderObjFromDBToMap(mapData){ //請提供整當地圖的資料
+    console.log(mapData.objects)
+    for (let i in mapData.objects){
+        const object = mapData.objects[i]
+        drawObjToMap(object.x,object.y,object.title,object.file,object.description,object.UID,object.user)
+        
+    }
+
+    
 }
 
 function drawObjToMap(x,y,title,fileRefNo,description,UID,user){
-    const marker = L.marker([y, x]).addTo(map);
+    const marker = L.marker([x, y]).addTo(map);
       marker.bindPopup(`
           <b>${title}</b><br>
           Description: ${description}<br>
