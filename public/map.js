@@ -41,8 +41,12 @@ function appendDataByTitle(title, newData) {
 var map = L.map('map').setView([51.505, -0.09], 13);
 
 // 加入 OpenStreetMap 圖層
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
+L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
 }).addTo(map);
 
 
@@ -261,24 +265,42 @@ function renderCurrentMap(){
         console.log('No data found with title:', titleToFind);
     }})
 }
-function deleteMap(mapTitleToDelete){
+function deleteMap(){
+    const mapTitleToDelete = window.localStorage.getItem("currentMapTitle")
     const database = firebase.database();
     const mapsRef = database.ref('/maps/');
     const user = firebase.auth().currentUser;
     const UID = user.uid;
     mapsRef.orderByChild('title').equalTo(mapTitleToDelete).once('value', (snapshot) => {
-        console.log(snapshot)
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => {
+              const itemData = childSnapshot.val();
+              const uid = itemData.UID;
+              console.log("UID:", uid);
+              if(uid==UID){
+                if (confirm(`Are You Sure?`)) {
+                    database.ref(snapshot.ref).remove()
+                    .then(() => {
+                         console.log("Data deleted successfully!");
+                        window.localStorage.setItem("currentMapTitle",null)
+                         window.location.href = 'index.html'
+                    })
+                    .catch((error) => {
+                      console.error("Error deleting data:", error);
+                    });
+                    
 
-        if(snapshot.UID==UID){
-            if (confirm(`Are You Sure?`)) {
-                snapshot.ref().delete()
-                window.localStorage.setItem("currentMapTitle",null)
-                window.Location.href = "./index.html"
-              }
-        }
-        else{
-            alert("You Are Not The Creator Of This Map!")
-        }
+                  }
+            }
+            else{
+                alert("You Are Not The Creator Of This Map!")
+            }
+            });
+          } else {
+            console.log("No items found with that title.");
+          }
+        
+ 
       });
     };
   
