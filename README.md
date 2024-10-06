@@ -9,6 +9,11 @@ With the help of the community, anyone can access firsthand information about th
 
 [Link to Presentation](https://github.com/Super1115/Map-it/blob/main/mapitPDF.pdf)
 
+## Who Are We?
+
+### We participated in NASA’s 2023 Space Apps Challenge. At the time, our technical skills weren’t fully developed, which left us with some regrets when submitting the final project.
+ A year later, we returned for another Space APP challenge, determined to improve. In this project, we still faced numerous difficulties and obstacles, such as database issues where data wasn’t stored in the correct location and challenges with matching users to the right maps. These problems required a great deal of thought and time to solve. However, by fully embracing the hackathon spirit from start to finish, we successfully overcame these obstacles and delivered a project within the deadline. We did it!
+
 
 ## Try it out!
 
