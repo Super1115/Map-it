@@ -51,7 +51,8 @@ function newMap(title){
     database.ref('/maps/').push(newMap)
     .then(snapshot => {
         console.log('Map added');
-        //應導向渲染地圖
+        window.localStorage.setItem("currentMapTitle",title)
+        window.location.href='map.html'
     })
     .catch(error => {
         console.error('Error adding object:', error);

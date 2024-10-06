@@ -134,6 +134,8 @@
     <script src="login.js"></script>
     <script>
       window.onload = function() {
+        const user = firebase.auth().currentUser;
+        console.log("Current user:", user);
         console.log("renderMap ")
         renderCurrentMap()
 };

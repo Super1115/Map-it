@@ -83,7 +83,12 @@ map.on('click', function(e) {
 
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
 async function saveMarker() {
-
+    const user = firebase.auth().currentUser;
+    console.log("Current user:", user);
+    if(!user){
+      alert("Please Login")
+      window.location.href = "./index.html"
+    }
 
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
@@ -99,10 +104,6 @@ async function saveMarker() {
 
     console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
 
-    const user = firebase.auth().currentUser;
-
-    // 檢查 user 是否登入
-    console.log("Current user:", user.displayName);
 
 
 
