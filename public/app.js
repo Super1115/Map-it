@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, get, query, orderByChild, equalTo, update, push } from "firebase/database";
+
 const { default: firebase } = require("firebase/compat/app");
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

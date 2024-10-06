@@ -1,20 +1,4 @@
-async function findMapByTitle(title){
-    const database = firebase.database();
-    const mapsRef = database.ref('maps');
-    await mapsRef.orderByChild('title').equalTo(title).once('value', (snapshot) => {
-  snapshot.forEach(childSnapshot => {
-    const mapsRef = childSnapshot.ref; 
-    console.log(mapsRef)
-
-    console.log("函式執行完畢")
-    return mapsRef
-  });
-});
-
-}
-
-function newObject(mapData,objectTitle,x,y,fileRefNo,description){
-    const database = firebase.database();
+function newObject(mapTitle,objectTitle,x,y,fileRefNo,description){
     const user = firebase.auth().currentUser;
     const UID = user.uid;
     const userName = user.displayName
@@ -29,15 +13,47 @@ function newObject(mapData,objectTitle,x,y,fileRefNo,description){
         UID: UID
 
     };
-    database.ref(mapData+'Object/').push(newObject)
-    .then(snapshot => {
-        console.log('Object added');
-        //應導向渲染地圖
-    })
-    .catch(error => {
-        console.error('Error adding object:', error);
-    });
+appendDataByTitle(mapTitle,newObject)
 }
+
+async function appendDataByTitle(title, newData) {
+    const db = firebase.database();
+    const dbRef = ref(db, 'maps');
+    const q = query(dbRef, orderByChild('title'), equalTo(title));
+  
+    try {
+      const snapshot = await get(q);
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key;
+          const existingData = childSnapshot.val().data || {};
+  
+          // Generate a new key for the new data
+          const newKey = push(ref(db)).key;
+  
+          // Prepare the updates
+          const updates = {};
+          updates[`maps/${childKey}/objects/${newKey}`] = newData;
+  
+          // Update the database
+          update(ref(db), updates)
+          .then(snapshot => {
+            console.log('Map added');
+            //應導向渲染地圖
+        })
+        .catch(error => {
+            console.error('Error adding object:', error);
+        });
+          console.log('Data appended successfully!');
+        });
+      } else {
+        console.log('No matching title found.');
+      }
+    } catch (error) {
+      console.error('Error getting data: ', error);
+    }
+  }
+  
 
 // 初始化地圖
 var map = L.map('map').setView([51.505, -0.09], 13);
@@ -85,10 +101,7 @@ map.on('click', function(e) {
 
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
 async function saveMarker() {
-    console.log("請求")
-    mapRef = await findMapByTitle("testMap")
-    
-    var mapInData = mapRef//輸入地圖標題
+    var mapTitle = "testMap"//輸入地圖標題
 
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
@@ -96,7 +109,6 @@ async function saveMarker() {
 
   // 檢查是否取得 fileInput 元素
   console.log("File input element:", fileInput);
-  console.log(mapRef);
   
   // 檢查檔案欄位是否存在以及是否選擇了檔案
   var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
@@ -111,7 +123,7 @@ async function saveMarker() {
   if (newMarkerLatLng && user) {
       // 調用 newObject 函數，將資料和座標傳遞給它
       newObject(
-        mapInData,          // 地圖
+        mapTitle,          // 地圖
           title,             // 標記的標題
           newMarkerLatLng.lat, // 緯度
           newMarkerLatLng.lng, // 經度

@@ -1,3 +1,4 @@
+
 function showCreateNewMapPrompt() {
     const user = firebase.auth().currentUser;
     if(user){
