@@ -272,6 +272,8 @@ function deleteMap(mapTitleToDelete){
         if(snapshot.UID==UID){
             if (confirm(`Are You Sure?`)) {
                 snapshot.ref().delete()
+                window.localStorage.setItem("currentMapTitle",null)
+                window.Location.href = "./index.html"
               }
         }
         else{
