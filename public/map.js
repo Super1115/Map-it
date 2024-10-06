@@ -85,9 +85,6 @@ map.on('click', function(e) {
 async function saveMarker() {
 
 
-    var mapTitle = "testMap"//輸入地圖標題
-
-
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var fileInput = document.getElementById('file');
@@ -112,7 +109,7 @@ async function saveMarker() {
   if (newMarkerLatLng && user) {
       // 調用 newObject 函數，將資料和座標傳遞給它
       newObject(
-        mapTitle,          // 地圖
+        window.localStorage.getItem("currentMapTitle"),          // 地圖
           title,             // 標記的標題
           newMarkerLatLng.lat, // 緯度
           newMarkerLatLng.lng, // 經度
@@ -151,6 +148,84 @@ function cancelMarker() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('file').value = '';
+}
+
+function showOpenMapPrompt(){
+    const user = firebase.auth().currentUser;
+    if(user){
+        var userInput = prompt("Input map Title：", "Input here...");
+         
+        checkMapTitleExists(userInput).then(exists => {
+        if (exists) {
+            console.log("map exists in the database.");
+            window.localStorage.setItem("currentMapTitle",userInput)
+            window.location.href='map.html'
+            renderCurrentMap()
+        } else {
+            alert(`${userInput} does NOT exist! Please Create Map`)
+            
+        }
+        })
+        .catch(error => {
+            console.error("Error checking name:", error);
+    });
+        
+    }
+    else{
+        alert("You Must Login To View Map")
+    }
+}
+
+function checkMapTitleExists(title) {
+    const database = firebase.database();
+    const mapsRef = database.ref('/maps/');
+    return new Promise((resolve, reject) => {
+      mapsRef.orderByChild('title').equalTo(title).once('value', (snapshot) => {
+        if (snapshot.exists()) {
+          resolve(true); // Name exists
+        } else {
+          resolve(false); // Name does not exist
+        }
+      });
+    });
+  }
+
+function renderCurrentMap(){
+    currentMapTitle = window.localStorage.getItem("currentMapTitle")
+    const database = firebase.database();
+    const ref = database.ref('maps/'); // Replace 'your/data/path' with the actual path to your data
+    const titleToFind = title; // Replace with the title you're searching for
+    ref.orderByChild('title').equalTo(titleToFind).once('value', (snapshot) => {
+    if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+            const ref = childSnapshot.ref; // This is the reference to the data with the matching title
+            console.log('Found data with title:', titleToFind, 'at ref:', ref);
+            ref.once('value',(snapshot) => {
+                renderObjFromDBToMap(snapshot.val())
+              })
+
+            // You can now access the data using ref.val() or perform other operations
+        });
+    } else {
+        console.log('No data found with title:', titleToFind);
+    }})
+}
+
+
+function renderObjFromDBToMap(mapData){ 
+    console.log(`DATA TO Render ${mapData}`)//請提供整當地圖的資料
+    mapData.objects.forEach(object=>
+        {drawObjToMap(object.x,object.y,object.title,object.file,object.description,object.UID,object.user)}
+    )
+}
+
+function drawObjToMap(x,y,title,fileRefNo,description,UID,user){
+    const marker = L.marker([y, x]).addTo(map);
+      marker.bindPopup(`
+          <b>${title}</b><br>
+          Description: ${description}<br>
+          File: ${fileRefNo}
+      `).openPopup();
 }
 
 window.onload = function() {
