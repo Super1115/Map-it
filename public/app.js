@@ -12,13 +12,13 @@ const analytics = getAnalytics(app);
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDlag6nKf0pSRNhOtfP5UNIuK3tOn7I5a8",
-  authDomain: "map-it-fee3b.firebaseapp.com",
-  projectId: "map-it-fee3b",
-  storageBucket: "map-it-fee3b.appspot.com",
-  messagingSenderId: "466109228008",
-  appId: "1:466109228008:web:99257b389800648d9c3a5d",
-  measurementId: "G-LVCDK5CPB0"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 document.addEventListener("DOMContentLoaded",event =>{
