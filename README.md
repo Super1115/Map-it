@@ -7,6 +7,8 @@ Users can easily create multiple maps or share a single map with others.
 
 With the help of the community, anyone can access firsthand information about the disaster sites, which can be helpful in rescues and ensuring safety.
 
+[Link to Presentation](https://github.com/Super1115/Map-it/blob/main/mapitPDF.pdf)
+
 
 ## Try it out!
 
