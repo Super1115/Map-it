@@ -13,7 +13,7 @@ async function findMapByTitle(title){
 
 }
 
-function newObject(mapData,objectTitle,x,y,fileRefNo,description){
+function newObject(mapData, objectTitle, x, y, fileRefNo, description){
     const database = firebase.database();
     const user = firebase.auth().currentUser;
     const UID = user.uid;
@@ -70,11 +70,11 @@ map.on('click', function(e) {
     var windowHeight = window.innerHeight;
 
     if (x + formWidth > windowWidth) {
-        x = windowWidth - formWidth - 10;  // 距離邊界10px
+        x = windowWidth - formWidth - 30;  // 距離邊界10px
     }
 
     if (y + formHeight > windowHeight) {
-        y = windowHeight - formHeight - 10;
+        y = windowHeight - formHeight - 30;
     }
 
     form.style.left = x + 'px';
@@ -88,55 +88,58 @@ async function saveMarker() {
     console.log("請求")
     mapRef = await findMapByTitle("testMap")
     
-    var mapInData = mapRef//輸入地圖標題
+    var mapInData = mapRef //輸入地圖標題
 
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var fileInput = document.getElementById('file');
 
-  // 檢查是否取得 fileInput 元素
-  console.log("File input element:", fileInput);
-  console.log(mapRef);
+    // 檢查是否取得 fileInput 元素
+    console.log("File input element:", fileInput);
+    console.log(mapRef);
   
-  // 檢查檔案欄位是否存在以及是否選擇了檔案
-  var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
-  
-  console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
+    // 檢查檔案欄位是否存在以及是否選擇了檔案
+    var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
 
-  const user = firebase.auth().currentUser;
+    console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
 
-  // 檢查 user 是否登入
-  console.log("Current user:", user.displayName);
+    const user = firebase.auth().currentUser;
 
-  if (newMarkerLatLng && user) {
-      // 調用 newObject 函數，將資料和座標傳遞給它
-      newObject(
+    // 檢查 user 是否登入
+    console.log("Current user:", user.displayName);
+
+    if (newMarkerLatLng && user) {
+        // 調用 newObject 函數，將資料和座標傳遞給它
+        newObject(
         mapInData,          // 地圖
-          title,             // 標記的標題
-          newMarkerLatLng.lat, // 緯度
-          newMarkerLatLng.lng, // 經度
-          fileRefNo,         // 檔案名
-          description        // 描述
-      );
-      console.log("加入資料庫")
-      // 在地圖上顯示新標記
-      const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
-      marker.bindPopup(`
-          <b>${title}</b><br>
-          Description: ${description}<br>
-          File: ${fileRefNo}
-      `).openPopup();
+            title,             // 標記的標題
+            newMarkerLatLng.lat, // 緯度
+            newMarkerLatLng.lng, // 經度
+            fileRefNo,         // 檔案名
+            description        // 描述
+        );
+        console.log("加入資料庫")
+        // 在地圖上顯示新標記
+        const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
+        marker.bindPopup(`
+            Latitude: ${newMarkerLatLng.lat.toFixed(6)}, Longitude: ${newMarkerLatLng.lng.toFixed(6)}<br>
+            <b>${title}</b><br>
+            Description: ${description}<br>
+            File: ${fileRefNo}
+        `).openPopup();
 
-      // 隱藏表單
-      document.getElementById('markerForm').style.display = 'none';
+        // 隱藏表單
+        document.getElementById('markerForm').style.display = 'none';
 
-      // 清空輸入框
-      document.getElementById('title').value = '';
-      document.getElementById('description').value = '';
-      fileInput.value = null;  // 清空檔案上傳欄位
-  } else {
-      alert("Please click on the map to add a marker and ensure you're logged in.");
-  }
+        // 清空輸入框
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        fileInput.value = null;  // 清空檔案上傳欄位
+    } 
+    
+    else {
+        alert("Please click on the map to add a marker and ensure you're logged in.");
+    }
 }
 
 

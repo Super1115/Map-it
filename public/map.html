@@ -8,9 +8,6 @@
     <!-- 引入 Leaflet.js 的 CSS 和 JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <script src="app.js"></script>
-
     <script defer src="/__/firebase/10.14.0/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.14.0/firebase-auth-compat.js"></script>
@@ -97,6 +94,21 @@
         font-size: 18px;
         color: #555;
       }
+      /* 定義 inputField 樣式 */
+      #inputField {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+      }
+
+      /* 定義 inputFile 樣式 */
+      #inputFile {
+          padding: 5px;
+          margin-bottom: 15px;
+      }
     </style>
   </head>
   <body>
@@ -107,9 +119,11 @@
     <div id="markerForm">
       <div id="coordinates"></div> <!-- 顯示座標位置 -->
       <label for="title">Title:</label>
-      <input type="text" id="title" name="title" placeholder="Enter title"><br>
+      <input type="text" id="title" name="title" placeholder="Enter title" class="inputField"><br>
       <label for="description">Description:</label><br>
-      <textarea id="description" name="description" placeholder="Enter description"></textarea><br>
+      <textarea id="description" name="description" placeholder="Enter description" class="inputField"></textarea><br>
+      <label for="file">Upload File:</label>
+      <input type="file" id="file" name="file class="inputFile""><br>
       <button onclick="saveMarker()">Save</button>
       <button class="cancel" onclick="cancelMarker()">Cancel</button>
     </div>
