@@ -26,7 +26,7 @@ function appendDataByTitle(title, newData) {
         snapshot.forEach((childSnapshot) => {
             const ref = childSnapshot.ref; // This is the reference to the data with the matching title
             console.log('Found data with title:', titleToFind, 'at ref:', ref);
-            database.ref(ref).push(newData)
+            database.ref(ref).child('objects').push(newData)
             // You can now access the data using ref.val() or perform other operations
         });
     } else {
