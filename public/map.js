@@ -40,15 +40,11 @@ function appendDataByTitle(title, newData) {
 // 初始化地圖
 var map = L.map('map').setView([51.505, -0.09], 13);
 
-// // 加入 OpenStreetMap 圖層
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
-
-L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3']
+// 加入 OpenStreetMap 圖層
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
 
 // 儲存當前點擊的經緯度
 var newMarkerLatLng = null;
@@ -101,8 +97,8 @@ async function saveMarker() {
     var fileInput = document.getElementById('file').files[0];
     var fileRefNo = null;
 
-  // 檢查是否取得 fileInput 元素
-  console.log("File input element:", fileInput);
+    // 檢查是否取得 fileInput 元素
+    console.log("File input element:", fileInput);
 
   
     // 檢查檔案欄位是否存在以及是否選擇了檔案
