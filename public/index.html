@@ -34,20 +34,25 @@
       body{
           font-family: "Bebas Neue", sans-serif;
           font-weight: 400;
-            background-color: #f0f0f0;
+          background-color: #f0f0f0;
+          background-image: url('hh-45.jpg'); 
+          background-size: 100% 100%;
+          background-position: center; 
       }
       .main{
         height: 100vh;
+        display: flex;
         justify-content: center;
         align-items: center;
       }
 
       .button {
           display: block;
-          width: 130px;
-          height: 40px;
+          width: 300px;
+          height: 250px;
           margin: 20px;
-          font-size: 16px;
+          gap: 20px;
+          font-size: 48px;
           font-family: "Bebas Neue", sans-serif;
           font-weight: 400;
           font-style: normal;
@@ -59,7 +64,8 @@
           transition: background-color 0.3s;
       }
       .button:hover {
-          background-color: #0967cb8d;
+          background-color: #ffffff;
+          color: rgb(0, 0, 0);
       }
 
       #loginButton {
@@ -78,14 +84,14 @@
 
     </style>
   </head>
-  <body background="hh-45.jpg">
+  <body>
     <script src="login.js"></script>
     <script src="createNewMap.js"></script>
     <script src="map.js"></script>
     <div class="signOut" id="signOut"><h1 id="signOutDivUserName" onclick="signOut()" id="signOutButton"></h1></div>
     <div class="main">
       <!-- Login button moved to top-right -->
-      <button class="button" id="loginButton" onclick="signInWithGoogle()">Login</button>
+      <button class="button" onclick="signInWithGoogle()">Login</button>
 
       <!-- Create and Maps buttons in the center -->
       <button class="button" onclick="showCreateNewMapPrompt()">Create</button>
