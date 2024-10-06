@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script defer src="/__/firebase/10.14.0/firebase-app-compat.js"></script>
+    
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.14.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.14.0/firebase-database-compat.js"></script>
@@ -19,6 +20,9 @@
     <script defer src="/__/firebase/10.14.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/10.14.0/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/10.14.0/firebase-performance-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <style>
@@ -129,6 +133,13 @@
           background-color: #0056b3;
       }
 
+      .popUpImg{
+        display: flex;
+        height: auto;
+        width: 100%;
+        margin: 5px;
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body>
@@ -145,8 +156,8 @@
       <input type="text" id="title" name="title" placeholder="Enter title" class="inputField"><br>
       <label for="description">Description:</label><br>
       <textarea id="description" name="description" placeholder="Enter description" class="inputField"></textarea><br>
-      <label for="file">Upload File:</label>
-      <input type="file" id="file" name="file class="inputFile""><br>
+      <label for="file">Upload Image:</label>
+      <input type="file" id="file" name="file" class="inputFile" accept="image/png, image/gif, image/jpeg" ><br>
       <button onclick="saveMarker()">Save</button>
       <button class="cancel" onclick="cancelMarker()">Cancel</button>
     </div>
