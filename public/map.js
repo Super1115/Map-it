@@ -88,6 +88,8 @@ map.on('click', function(e) {
 // 創建 saveMarker() 函數，將表單的輸入保存到 Firebase
 async function saveMarker() {
     const user = firebase.auth().currentUser;
+    const storage = firebase.storage()
+    console.log(storage)
     console.log("Current user:", user);
     if(!user){
       alert("Please Login")
@@ -96,50 +98,98 @@ async function saveMarker() {
 
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
-    var fileInput = document.getElementById('file');
-
+    var fileInput = document.getElementById('file').files[0];
+    var fileRefNo = null;
 
   // 檢查是否取得 fileInput 元素
   console.log("File input element:", fileInput);
 
   
     // 檢查檔案欄位是否存在以及是否選擇了檔案
-    var fileRefNo = fileInput && fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
+    if (fileInput != null){
+        
+        console.log("File to upload");  // 這行將確認我們是否正確處理檔案
+        storage.ref("/image/"+fileInput.name).put(fileInput).then((snapshot) => {
+            console.log('Uploaded file successfully!');
+            console.log(snapshot)
+            snapshot.ref.getDownloadURL().then(url =>{
+                fileRefNo = url
+                console.log(fileRefNo)
+                if (newMarkerLatLng && user) {
+                    // 調用 newObject 函數，將資料和座標傳遞給它
+                    console.log(fileRefNo)
+                    newObject(
+                      window.localStorage.getItem("currentMapTitle"),          // 地圖
+                        title,             // 標記的標題
+                        newMarkerLatLng.lat, // 緯度
+                        newMarkerLatLng.lng, // 經度
+                        fileRefNo,         // 檔案名
+                        description        // 描述
+                    );
+                    console.log("加入資料庫")
+                    // 在地圖上顯示新標記
+                    const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
+                    marker.bindPopup(`
+                        <b>${title}</b><br>
+                        Description: ${description}<br>
+                        File: ${fileRefNo}
+                    `).openPopup();
+              
+                    // 隱藏表單
+                    document.getElementById('markerForm').style.display = 'none';
+              
+                    // 清空輸入框
+                    document.getElementById('title').value = '';
+                    document.getElementById('description').value = '';
+                    fileInput.value = null;  // 清空檔案上傳欄位
+                } else {
+                    alert("Please click on the map to add a marker and ensure you're logged in.");
+                }
+            }).catch((error) => {
+                console.error('Error getting URL:', error);
+              });
 
-    console.log("File to upload:", fileRefNo);  // 這行將確認我們是否正確處理檔案
+          }).catch((error) => {
+            console.error('Error uploading file:', error);
+          });
+    }else{
+        if (newMarkerLatLng && user) {
+            // 調用 newObject 函數，將資料和座標傳遞給它
+            console.log(fileRefNo)
+            newObject(
+              window.localStorage.getItem("currentMapTitle"),          // 地圖
+                title,             // 標記的標題
+                newMarkerLatLng.lat, // 緯度
+                newMarkerLatLng.lng, // 經度
+                fileRefNo,         // 檔案名
+                description        // 描述
+            );
+            console.log("加入資料庫")
+            // 在地圖上顯示新標記
+            const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
+            marker.bindPopup(`
+                <b>${title}</b><br>
+                Description: ${description}<br>
+                File: ${fileRefNo}
+            `).openPopup();
+      
+            // 隱藏表單
+            document.getElementById('markerForm').style.display = 'none';
+      
+            // 清空輸入框
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            fileInput.value = null;  // 清空檔案上傳欄位
+        } else {
+            alert("Please click on the map to add a marker and ensure you're logged in.");
+        }
+    }
 
 
 
 
-  if (newMarkerLatLng && user) {
-      // 調用 newObject 函數，將資料和座標傳遞給它
-      newObject(
-        window.localStorage.getItem("currentMapTitle"),          // 地圖
-          title,             // 標記的標題
-          newMarkerLatLng.lat, // 緯度
-          newMarkerLatLng.lng, // 經度
-          fileRefNo,         // 檔案名
-          description        // 描述
-      );
-      console.log("加入資料庫")
-      // 在地圖上顯示新標記
-      const marker = L.marker([newMarkerLatLng.lat, newMarkerLatLng.lng]).addTo(map);
-      marker.bindPopup(`
-          <b>${title}</b><br>
-          Description: ${description}<br>
-          File: ${fileRefNo}
-      `).openPopup();
 
-      // 隱藏表單
-      document.getElementById('markerForm').style.display = 'none';
-
-      // 清空輸入框
-      document.getElementById('title').value = '';
-      document.getElementById('description').value = '';
-      fileInput.value = null;  // 清空檔案上傳欄位
-  } else {
-      alert("Please click on the map to add a marker and ensure you're logged in.");
-  }
+  
 
 }
 

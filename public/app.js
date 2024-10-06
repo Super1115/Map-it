@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, get, query, orderByChild, equalTo, update, push } from "firebase/database";
+
 
 const { default: firebase } = require("firebase/compat/app");
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
