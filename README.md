@@ -1,5 +1,5 @@
 # Map it
-![]("./Slide 4_3 - 1.png")
+![image](logo.png)
 
 
 ## Try it out!
