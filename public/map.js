@@ -261,6 +261,26 @@ function renderCurrentMap(){
         console.log('No data found with title:', titleToFind);
     }})
 }
+function deleteMap(mapTitleToDelete){
+    const database = firebase.database();
+    const mapsRef = database.ref('/maps/');
+    const user = firebase.auth().currentUser;
+    const UID = user.uid;
+    mapsRef.orderByChild('title').equalTo(mapTitleToDelete).once('value', (snapshot) => {
+        console.log(snapshot)
+
+        if(snapshot.UID==UID){
+            if (confirm(`Are You Sure?`)) {
+                snapshot.ref().delete()
+              }
+        }
+        else{
+            alert("You Are Not The Creator Of This Map!")
+        }
+      });
+    };
+  
+
 
 
 function renderObjFromDBToMap(mapData){ //請提供整當地圖的資料

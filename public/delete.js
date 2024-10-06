@@ -1,5 +1,3 @@
-import { findMapByTitle,findObjectByTitle } from "./find.js"
-
 function deleteMap(mapTitleToDelete){
     const database = firebase.database();
     const mapsRef = database.ref('/maps/');
